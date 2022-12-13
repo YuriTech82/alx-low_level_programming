@@ -17,7 +17,7 @@ void print_times_table(int n)
 		_putchar(48);
 		for (mult = 1; mult <= n; ++mult)
 		{
-		_putchar(',')
+		_putchar(',');
 		_putchar(' ');
 
 		prod = num * mult;
