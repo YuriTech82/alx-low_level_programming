@@ -2,18 +2,13 @@
 
 /**
  * _puts - prints a string
- * @str: the string
- *
- * Return: the length of the string
+ * @str: string to be printed
  */
 void _puts(char *str)
 {
-	int i = 0;
-
-	while (str[i] != '\0')
+	while (*str != '\0')
 	{
-		_putchar(str[i]);
-		i++;
+		_putchar(*str++);
 	}
-	_putchar('\n);
+	_putchar('\n');
 }
