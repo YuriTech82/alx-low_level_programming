@@ -1,39 +1,50 @@
+#include <stdio.h>
 #include "search_algos.h"
 
 /**
-  * binary_search - Searches for a value in a sorted array
-  *                 of integers using binary search.
-  * @array: A pointer to the first element of the array to search.
-  * @size: The number of elements in the array.
-  * @value: The value to search for.
-  *
-  * Return: If the value is not present or the array is NULL, -1.
-  *         Otherwise, the index where the value is located.
-  *
-  * Description: Prints the [sub]array being searched after each change.
-  */
+ * print_array - Print the current state of the array being searched
+ * @array: Points to the first element of the array being searched
+ * @left: The left-most element in @array
+ * @right: The right-most element in @array
+ */
+void print_array(int *array, size_t left, size_t right)
+{
+	printf("Searching in array: ");
+	while (left <= right)
+	{
+		printf("%d", *(array + left));
+		if (left != right)
+			printf(", ");
+		left = left + 1;
+	}
+	printf("\n");
+}
+
+/**
+ * binary_search - Searches a val in a sorted int arr of using Binary search
+ * @array: Points to the first element of the array to search
+ * @size: Number of elements in @array
+ * @value: Value to search for
+ *
+ * Return: Index of @value. -1 if @array is NULL or @value not in @array
+ */
 int binary_search(int *array, size_t size, int value)
 {
-	size_t i, left, right;
+	size_t left = 0, mid, right = size - 1;
 
-	if (array == NULL)
-		return (-1);
-
-	for (left = 0, right = size - 1; right >= left;)
+	if (array != NULL)
 	{
-		printf("Searching in array: ");
-		for (i = left; i < right; i++)
-			printf("%d, ", array[i]);
-		printf("%d\n", array[i]);
-
-		i = left + (right - left) / 2;
-		if (array[i] == value)
-			return (i);
-		if (array[i] > value)
-			right = i - 1;
-		else
-			left = i + 1;
+		while (left <= right)
+		{
+			print_array(array, left, right);
+			mid = (left + right) / 2;
+			if (*(array + mid) < value)
+				left = mid + 1;
+			else if (*(array + mid) > value)
+				right = mid - 1;
+			else
+				return (mid);
+		}
 	}
-
 	return (-1);
 }
